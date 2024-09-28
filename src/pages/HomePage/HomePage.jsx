@@ -19,19 +19,19 @@ const bigBannerData = {
   text: "Discount up to 30% and free shipping for orders over $399",
   imgUrl:
     "https://images.pexels.com/photos/934069/pexels-photo-934069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  url: "/test-covet-lux/products?page=1",
+  url: "/covet-lux-fake-api/products?page=1",
 };
 
 const smallBannerData = [
   {
     header: "EXPLORE INTERESTING BLOG POSTS",
-    url: "/test-covet-lux/blog",
+    url: "/covet-lux-fake-api/blog",
     imgUrl:
       "https://images.pexels.com/photos/934070/pexels-photo-934070.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   },
   {
     header: "ABOUT COVET LUX",
-    url: "/test-covet-lux/infor",
+    url: "/covet-lux-fake-api/infor",
     imgUrl:
       "https://images.pexels.com/photos/1937336/pexels-photo-1937336.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   },
@@ -41,7 +41,7 @@ const introData = {
   title: "What is Covet Lux",
   content:
     "Covet Lux is a minimalist e-commerce website dedicated to offering simple, elegant clothing for those who appreciate timeless fashion. Specializing in high-quality, understated pieces, Covet Lux focuses on creating a curated collection of essential wardrobe staples that are both stylish and versatile.",
-  url: "/test-covet-lux/infor",
+  url: "/covet-lux-fake-api/infor",
 };
 
 function HomePage() {
@@ -98,7 +98,7 @@ function HomePage() {
           isEmptyList={newProductList.length === 0}>
           <ListHeader
             title={"Best seller"}
-            url={"/test-covet-lux/product"}></ListHeader>
+            url={"/covet-lux-fake-api/product"}></ListHeader>
           <FlexContainer>
             {newProductList.map((product, i) => (
               <ProductItem product={product} key={`new-prd-${i}`}></ProductItem>
@@ -114,7 +114,7 @@ function HomePage() {
           isEmptyList={bestProductList.length === 0}>
           <ListHeader
             title={"New product"}
-            url={"/test-covet-lux/product"}></ListHeader>
+            url={"/covet-lux-fake-api/product"}></ListHeader>
           <FlexContainer>
             {bestProductList.map((product, i) => (
               <ProductItem product={product} key={`new-prd-${i}`}></ProductItem>
@@ -140,7 +140,7 @@ function HomePage() {
           {" "}
           <ListHeader
             title={"New blog"}
-            url={"/test-covet-lux/blog"}></ListHeader>
+            url={"/covet-lux-fake-api/blog"}></ListHeader>
           <FlexContainer>
             {blogList.map((blog, i) => (
               <BlogItem blog={blog} key={`blog-${i}`}></BlogItem>

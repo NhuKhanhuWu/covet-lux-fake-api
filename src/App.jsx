@@ -15,22 +15,24 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/test-covet-lux" element={<HomePage />}></Route>
-        <Route path="/test-covet-lux/blog" element={<Blog />}></Route>
-        <Route path="/test-covet-lux/contact" element={<Contact />}></Route>
-        <Route path="/test-covet-lux/infor" element={<Infor />}></Route>
+        <Route path="/covet-lux-fake-api" element={<HomePage />}></Route>
+        <Route path="/covet-lux-fake-api/blog" element={<Blog />}></Route>
+        <Route path="/covet-lux-fake-api/contact" element={<Contact />}></Route>
+        <Route path="/covet-lux-fake-api/infor" element={<Infor />}></Route>
 
         {/* product: start */}
-        <Route path="/test-covet-lux/products" element={<Product />}></Route>
         <Route
-          path="/test-covet-lux/product"
+          path="/covet-lux-fake-api/products"
+          element={<Product />}></Route>
+        <Route
+          path="/covet-lux-fake-api/product"
           element={<ProductDetail />}></Route>
         {/* product:end */}
 
         {/* cart & checkout: start */}
-        <Route path="/test-covet-lux/cart" element={<Cart></Cart>}></Route>
+        <Route path="/covet-lux-fake-api/cart" element={<Cart></Cart>}></Route>
         <Route
-          path="/test-covet-lux/checkout"
+          path="/covet-lux-fake-api/checkout"
           element={<Checkout></Checkout>}></Route>
         {/* cart & checkout: end */}
       </Routes>

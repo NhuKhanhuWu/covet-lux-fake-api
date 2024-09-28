@@ -25,7 +25,7 @@ function Category() {
           {categories.slice(0, 4).map((catgr, i) => (
             <Link
               key={`category-${i}`}
-              to={`/test-covet-lux/products/?categoryId=${catgr.id}`}>
+              to={`/covet-lux-fake-api/products/?categoryId=${catgr.id}`}>
               {catgr.name}
             </Link>
           ))}
@@ -35,7 +35,7 @@ function Category() {
             categories.slice(4).map((catgr, i) => (
               <Link
                 key={`category-${i}`}
-                to={`/test-covet-lux/products/?categoryId=${catgr.id}`}>
+                to={`/covet-lux-fake-api/products/?categoryId=${catgr.id}`}>
                 {catgr.name}
               </Link>
             ))}

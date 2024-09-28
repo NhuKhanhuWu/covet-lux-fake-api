@@ -74,7 +74,7 @@ function ByNowBtn({ product, amount }) {
           () => {}
         )
       }
-      to={`/test-covet-lux/cart/`}
+      to={`/covet-lux-fake-api/cart/`}
       className="fill-btn">
       Buy now
     </Link>
@@ -290,7 +290,7 @@ function ProductDetail() {
         }>
         <ListHeader
           title={"You may like"}
-          url={`/test-covet-lux/products/?categoryId=${categoryId}&page=1`}></ListHeader>
+          url={`/covet-lux-fake-api/products/?categoryId=${categoryId}&page=1`}></ListHeader>
         <FlexContainer>
           {Array.isArray(recommenedProduct) &&
             recommenedProduct.map((product, i) => (

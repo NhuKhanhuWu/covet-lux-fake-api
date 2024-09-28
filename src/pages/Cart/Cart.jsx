@@ -161,7 +161,7 @@ function CheckoutContainer({ totalMoney, setTotalMoney }) {
   return (
     <>
       <Link
-        to={"/test-covet-lux/checkout"}
+        to={"/covet-lux-fake-api/checkout"}
         className={`fill-btn ${styles.checkoutBtn}`}>
         Checkout
       </Link>
