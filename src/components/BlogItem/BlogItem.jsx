@@ -4,12 +4,12 @@ import styles from "./BlogItem.module.css";
 
 function BlogItem({ blog }) {
   return (
-    <div className={styles.blog}>
-      <div className="overflow-container">
+    <div className={`${styles.blog} overflow-container`}>
+      <div className={`overflow-container ${styles.imgContainer}`}>
         <img
           alt={blog.title}
-          src={blog?.images[0]?.replace("[", "").replace('"', "")}
-          className={`img overflow-item ${styles.blogImg}`}></img>
+          src={blog?.image?.replace("[", "").replace('"', "")}
+          className={`img ${styles.blogImg}`}></img>
       </div>
 
       <p className={styles.title}>{blog.title}</p>

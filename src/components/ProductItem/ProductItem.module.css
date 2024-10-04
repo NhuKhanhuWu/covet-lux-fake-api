@@ -6,18 +6,24 @@
 /* img */
 .imgContainer {
   position: relative;
+  height: 20rem;
+  overflow: hidden;
 }
 
-.imgContainer > img:first-child {
+.container:hover .imgContainer > img {
+  transform: translateY(-50%) scale(1.2);
+}
+
+.imgContainer > img {
   position: absolute;
-  top: 0;
-  left: 0;
-  transition: all 0.3s;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s;
 }
 
-.container:hover > .imgContainer > img:first-child {
+/* .container:hover > .imgContainer > img:first-child {
   opacity: 0;
-}
+} */
 
 /* text */
 .title {

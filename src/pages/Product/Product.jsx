@@ -62,17 +62,13 @@ function reducer(state, action) {
 function Product() {
   // get filter query
   const [urlQuery] = useSearchParams();
+  const [page, setPage] = useState(1);
 
   const categoryId =
     urlQuery.get("categoryId") === null ? "" : urlQuery.get("categoryId");
-  const minPrice =
-    urlQuery.get("price_min") === null ? "" : urlQuery.get("price_min");
-  const maxPrice =
-    urlQuery.get("price_max") === null ? "" : urlQuery.get("price_max");
   const title = urlQuery.get("title") === null ? "" : urlQuery.get("title");
-  const page = urlQuery.get("page") === null ? 1 : urlQuery.get("page");
 
-  const query = `?price_min=${minPrice}&price_max=${maxPrice}&title=${title}&categoryId=${categoryId}`;
+  const query = `?title=${title}&categoryId=${categoryId}`;
 
   // get product by query
   const { dataResponse, isError, isLoading } = useGetData(

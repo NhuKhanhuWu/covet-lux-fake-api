@@ -45,23 +45,7 @@ const introData = {
 };
 
 function HomePage() {
-  const {
-    isLoading: newIsLoading,
-    isError: newIsError,
-    dataResponse: newProductList,
-  } = useGetData("products?offset=0&limit=5");
-
-  const {
-    isLoading: bestIsLoading,
-    isError: bestIsError,
-    dataResponse: bestProductList,
-  } = useGetData("products?offset=5&limit=5");
-
-  const {
-    isLoading: isBlogLoading,
-    isError: blogErr,
-    dataResponse: blogList,
-  } = useGetData("products?offset=10&limit=4");
+  const { isLoading, isError, dataResponse } = useGetData("products?limit=14");
 
   return (
     <>
@@ -93,14 +77,14 @@ function HomePage() {
 
         {/* new product: start */}
         <RenderQueryData
-          isError={newIsError}
-          isLoading={newIsLoading}
-          isEmptyList={newProductList.length === 0}>
+          isError={isError}
+          isLoading={isLoading}
+          isEmptyList={dataResponse.slice(0, 4).length === 0}>
           <ListHeader
             title={"Best seller"}
             url={"/covet-lux-fake-api/product"}></ListHeader>
-          <FlexContainer>
-            {newProductList.map((product, i) => (
+          <FlexContainer spaceBetween={true}>
+            {dataResponse.slice(0, 4).map((product, i) => (
               <ProductItem product={product} key={`new-prd-${i}`}></ProductItem>
             ))}
           </FlexContainer>
@@ -109,14 +93,14 @@ function HomePage() {
 
         {/* best seller product: start */}
         <RenderQueryData
-          isError={bestIsError}
-          isLoading={bestIsLoading}
-          isEmptyList={bestProductList.length === 0}>
+          isError={isError}
+          isLoading={isLoading}
+          isEmptyList={dataResponse.slice(6, 10).length === 0}>
           <ListHeader
             title={"New product"}
             url={"/covet-lux-fake-api/product"}></ListHeader>
-          <FlexContainer>
-            {bestProductList.map((product, i) => (
+          <FlexContainer spaceBetween={true}>
+            {dataResponse.slice(6, 10).map((product, i) => (
               <ProductItem product={product} key={`new-prd-${i}`}></ProductItem>
             ))}
           </FlexContainer>
@@ -134,22 +118,19 @@ function HomePage() {
 
         {/* blog section: start */}
         <RenderQueryData
-          isError={blogErr}
-          isLoading={isBlogLoading}
-          isEmptyList={blogList.length === 0}>
-          {" "}
+          isError={isError}
+          isLoading={isLoading}
+          isEmptyList={dataResponse.slice(11, 14).length === 0}>
           <ListHeader
             title={"New blog"}
             url={"/covet-lux-fake-api/blog"}></ListHeader>
           <FlexContainer>
-            {blogList.map((blog, i) => (
+            {dataResponse.slice(11, 14).map((blog, i) => (
               <BlogItem blog={blog} key={`blog-${i}`}></BlogItem>
             ))}
           </FlexContainer>
         </RenderQueryData>
         {/* blog section: end */}
-
-        <BlankDivider distance={2}></BlankDivider>
       </main>
 
       {/* footer: start */}

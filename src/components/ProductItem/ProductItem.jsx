@@ -1,5 +1,4 @@
 /** @format */
-import PropTypes from "prop-types";
 import styles from "./ProductItem.module.css";
 import { Link } from "react-router-dom";
 
@@ -10,12 +9,12 @@ function ProductItem({ product }) {
         <div className={styles.imgContainer}>
           <img
             alt={product.title}
-            src={product?.images[0]?.replace("[", "").replace('"', "")}
+            src={product?.image?.replace("[", "").replace('"', "")}
             className="img"></img>
-          <img
+          {/* <img
             alt={product.title}
             src={product?.images[1]?.replace("[", "").replace('"', "")}
-            className="img"></img>
+            className="img"></img> */}
         </div>
 
         <p className={styles.title}>{product.title}</p>
@@ -33,14 +32,5 @@ function ProductItem({ product }) {
     </Link>
   );
 }
-
-ProductItem.propTypes = {
-  product: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    images: PropTypes.array.isRequired,
-    price: PropTypes.number.isRequired,
-    description: PropTypes.string,
-  }).isRequired,
-};
 
 export default ProductItem;

@@ -16,3 +16,21 @@
   font-style: italic;
   font-weight: 300;
 }
+
+.blog:hover .imgContainer > img {
+  transform: translateY(-50%) scale(1.2);
+}
+
+.imgContainer {
+  position: relative;
+  height: 20rem;
+  overflow: hidden;
+}
+
+.imgContainer > img {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  transition: transform 0.3s;
+}

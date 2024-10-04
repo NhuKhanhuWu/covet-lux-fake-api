@@ -15,10 +15,8 @@ function useGetData(query) {
           setError("");
 
           // try get data
-          const response = await fetch(
-            `https://api.escuelajs.co/api/v1/${query}`
-          );
-          // console.log(`https://api.escuelajs.co/api/v1/${query}`);
+          const response = await fetch(`https://fakestoreapi.com/${query}`);
+          console.log(`https://fakestoreapi.com/${query}`);
 
           const data = await response.json();
           setDataResponse(data);
