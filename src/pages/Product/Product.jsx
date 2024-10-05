@@ -64,16 +64,14 @@ function Product() {
   const [urlQuery] = useSearchParams();
   const [page, setPage] = useState(1);
 
-  const categoryId =
+  const category =
     urlQuery.get("categoryId") === null ? "" : urlQuery.get("categoryId");
   const title = urlQuery.get("title") === null ? "" : urlQuery.get("title");
 
-  const query = `?title=${title}&categoryId=${categoryId}`;
+  const query = `products${category !== "" ? "/category" : ""}/${category}`;
 
   // get product by query
-  const { dataResponse, isError, isLoading } = useGetData(
-    `products/${query}&offset=${12 * (page - 1)}&limit=12`
-  );
+  const { dataResponse, isError, isLoading } = useGetData(query);
 
   // store data in reducer
   const [{ productList, error, loading }, dispacth] = useReducer(
@@ -99,10 +97,10 @@ function Product() {
       <FlexContainer gap={5}>
         <SideBarProduct>
           <Category></Category>
-          <PriceRange dispacth={dispacth}></PriceRange>
+          {/* <PriceRange dispacth={dispacth}></PriceRange> */}
         </SideBarProduct>
 
-        <GridContainer numCol={4}>
+        <GridContainer numCol={4} gap={5}>
           <RenderQueryData
             isError={error}
             isLoading={loading}
@@ -115,7 +113,7 @@ function Product() {
       </FlexContainer>
 
       <BlankDivider distance={3}></BlankDivider>
-      <Pagination query={query} count={3} currPage={page}></Pagination>
+      {/* <Pagination query={query} count={3} currPage={page}></Pagination> */}
       <BlankDivider></BlankDivider>
 
       <Footer></Footer>

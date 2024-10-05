@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-function useGetData(query) {
+function useGetDataList(query, idList) {
   const [dataResponse, setDataResponse] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState("");
@@ -15,10 +15,21 @@ function useGetData(query) {
           setError("");
 
           // try get data
-          const response = await fetch(`https://fakestoreapi.com/${query}`);
-          // console.log(`https://fakestoreapi.com/${query}`);
+          const dataPromises = idList.map(async (id) => {
+            const response = await fetch(
+              `https://fakestoreapi.com/${query}/${id}`
+            );
+            // console.log(`https://api.escuelajs.co/api/v1/${query}/${id}`);
 
-          const data = await response.json();
+            if (!response.ok) {
+              throw new Error(`Failed to fetch product with ID: ${id}`);
+            }
+
+            return response.json();
+          });
+
+          // Wait for all promises to resolve
+          const data = await Promise.all(dataPromises);
           setDataResponse(data);
         } catch (err) {
           setError(err.message); //set error if there is
@@ -29,9 +40,9 @@ function useGetData(query) {
 
       fetchData();
     },
-    [query, setDataResponse]
+    [query]
   );
   return { dataResponse, isLoading, isError };
 }
 
-export default useGetData;
+export default useGetDataList;

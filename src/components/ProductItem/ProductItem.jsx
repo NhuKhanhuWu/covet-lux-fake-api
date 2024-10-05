@@ -11,10 +11,6 @@ function ProductItem({ product }) {
             alt={product.title}
             src={product?.image?.replace("[", "").replace('"', "")}
             className="img"></img>
-          {/* <img
-            alt={product.title}
-            src={product?.images[1]?.replace("[", "").replace('"', "")}
-            className="img"></img> */}
         </div>
 
         <p className={styles.title}>{product.title}</p>
@@ -22,9 +18,9 @@ function ProductItem({ product }) {
 
         <div>
           <Link
-            to={`/covet-lux-fake-api/products/?categoryId=${product.category.id}&page=1`}
+            to={`/covet-lux-fake-api/products/?categoryId=${product.category}&page=1`}
             className={styles.categoryTag}>
-            {product.category.name}
+            {product.category}
           </Link>{" "}
           | <span className={styles.price}>${product.price}</span>
         </div>

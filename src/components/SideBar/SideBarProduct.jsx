@@ -1,18 +1,22 @@
 /** @format */
 
 import useGetData from "../../hooks/useGetData";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import styles from "./SideBarProduct.module.css";
 import RenderQueryData from "../RenderQueryData.jsx";
 import { useEffect, useRef, useState } from "react";
 
 function Category() {
+  // get all category
   const {
     dataResponse: categories,
     isLoading,
     isError,
-  } = useGetData("categories");
-  const [isExpanded, setExpanded] = useState(false);
+  } = useGetData("products/categories");
+
+  // highlight current category
+  const [url] = useSearchParams();
+  const currCategory = url.get("categoryId");
 
   return (
     <div className={styles.category}>
@@ -21,33 +25,19 @@ function Category() {
         isError={isError}
         isLoading={isLoading}
         isEmptyList={categories.length === 0}>
-        <div className="columnContent" style={{ marginBottom: "1.5rem" }}>
-          {categories.slice(0, 4).map((catgr, i) => (
+        <div
+          className="columnContent"
+          style={{ marginBottom: "1.5rem", gap: "2rem" }}>
+          {categories.map((catgr, i) => (
             <Link
+              className={catgr == currCategory ? "orange-text" : ""}
               key={`category-${i}`}
-              to={`/covet-lux-fake-api/products/?categoryId=${catgr.id}`}>
-              {catgr.name}
+              to={`/covet-lux-fake-api/products/?categoryId=${catgr}`}>
+              {catgr.slice(0, 1).toUpperCase() + catgr.slice(1)}
             </Link>
           ))}
-
-          {/* expanded part: start */}
-          {isExpanded &&
-            categories.slice(4).map((catgr, i) => (
-              <Link
-                key={`category-${i}`}
-                to={`/covet-lux-fake-api/products/?categoryId=${catgr.id}`}>
-                {catgr.name}
-              </Link>
-            ))}
-          {/* expanded part: end */}
         </div>
       </RenderQueryData>
-
-      <button
-        className="border-btn border-btn--small"
-        onClick={() => setExpanded(!isExpanded)}>
-        {isExpanded ? "Less" : "More"}
-      </button>
     </div>
   );
 }

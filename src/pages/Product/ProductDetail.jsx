@@ -50,8 +50,9 @@ function ProductDetail() {
   // get category id when productDetail fully loaded
   useEffect(
     function () {
-      if (productDetail.category)
-        setCategory(productDetail.category.replace(" ", "%20"));
+      if (productDetail && productDetail.category) {
+        setCategory(encodeURIComponent(productDetail.category));
+      }
     },
     [productDetail]
   );
@@ -61,9 +62,7 @@ function ProductDetail() {
     dataResponse: recommenedProduct,
     isLoading: isLoading_recommenedProduct,
     isError: isError_recommenedProduct,
-  } = useGetData(
-    category ? `products/category/${productDetail.category}` : null
-  );
+  } = useGetData(`products/category/${category}`);
 
   // handle add to cart
   const dispatch = useDispatch();
@@ -79,6 +78,8 @@ function ProductDetail() {
   return (
     <>
       <NavBar></NavBar>
+
+      <BlankDivider></BlankDivider>
 
       {/* product infor: start */}
       <FlexContainer elClass={styles.productInfor}>

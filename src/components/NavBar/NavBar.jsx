@@ -1,10 +1,12 @@
 /** @format */
 
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import logo from "../../../public/logo-no-background.png";
 
 function NavBar() {
+  const isLogin = localStorage.getItem("user") !== null;
+
   return (
     <nav className={styles.nav}>
       <Link to="/covet-lux-fake-api">
@@ -13,19 +15,19 @@ function NavBar() {
 
       <ul className={styles.navLink}>
         <li>
-          <NavLink to="/covet-lux-fake-api">HOME PAGE</NavLink>
+          <Link to="/covet-lux-fake-api">HOME PAGE</Link>
         </li>
         <li>
-          <NavLink to="/covet-lux-fake-api/products?page=1">PRODUCT</NavLink>
+          <Link to="/covet-lux-fake-api/products?page=1">PRODUCT</Link>
         </li>
         <li>
-          <NavLink to="/covet-lux-fake-api/blog">BLOG</NavLink>
+          <Link to="/covet-lux-fake-api/blog">BLOG</Link>
         </li>
         <li>
-          <NavLink to="/covet-lux-fake-api/contact">CONTACT</NavLink>
+          <Link to="/covet-lux-fake-api/contact">CONTACT</Link>
         </li>
         <li>
-          <NavLink to="/covet-lux-fake-api/infor">INFOR</NavLink>
+          <Link to="/covet-lux-fake-api/infor">INFOR</Link>
         </li>
       </ul>
 
@@ -39,9 +41,21 @@ function NavBar() {
         <Link to="/covet-lux-fake-api/cart">
           <ion-icon name="cart-outline"></ion-icon>
         </Link>
-        <Link to="/covet-lux-fake-api/account">
-          <ion-icon name="person-outline"></ion-icon>
-        </Link>
+
+        {/* display differen el when login/not login */}
+        {isLogin ? (
+          <Link to="/covet-lux-fake-api/account">
+            <span
+              className="material-symbols-outlined icon"
+              style={{ fontSize: "3rem", margin: 0 }}>
+              account_circle
+            </span>
+          </Link>
+        ) : (
+          <Link to="/covet-lux-fake-api/login" className={styles.loginLink}>
+            LOGIN
+          </Link>
+        )}
       </ul>
     </nav>
   );
