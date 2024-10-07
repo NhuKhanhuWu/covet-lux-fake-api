@@ -1,13 +1,13 @@
 /** @format */
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
-import { StatusBar } from "./component/StatusBar";
+import { StatusBar } from "./component_orderDetail/StatusBar";
 import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import styles from "./OrderDetail.module.css";
 import { BlankDivider } from "../../components/Divider";
-import { Header } from "./component/Header";
+import { Header } from "./component_orderDetail/Header";
 
 function OrderDetail() {
   // get order id

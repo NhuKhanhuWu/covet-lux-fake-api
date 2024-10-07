@@ -11,7 +11,8 @@ export function ProductItem({ product }) {
             alt={product.title}
             src={product.image}
             className={`img`}
-            style={{ width: "9rem" }}></img>
+            style={{ width: "9rem" }}
+            loading="lazy"></img>
           <div
             className={`columnContent ${styles.productTxt}`}
             style={{ width: "60%" }}>

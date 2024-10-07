@@ -9,7 +9,8 @@ function BlogItem({ blog }) {
         <img
           alt={blog.title}
           src={blog?.image?.replace("[", "").replace('"', "")}
-          className={`img ${styles.blogImg}`}></img>
+          className={`img ${styles.blogImg}`}
+          loading="lazy"></img>
       </div>
 
       <p className={styles.title}>{blog.title}</p>

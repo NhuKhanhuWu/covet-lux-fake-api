@@ -39,7 +39,8 @@ export function Product({ index, productList, setProductList }) {
             <img
               className={styles.img}
               alt={productList[index].title}
-              src={productList[index].image}></img>
+              src={productList[index].image}
+              loading="lazy"></img>
           </td>
 
           <td>
