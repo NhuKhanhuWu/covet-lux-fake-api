@@ -3,7 +3,7 @@
 import styles from "../Checkout.module.css";
 
 export function Total({ total }) {
-  const shippingFee = total >= 100 ? 0 : 5;
+  const shippingFee = total >= 100 ? 0 : 10;
   return (
     <table className={`${styles.table} ${styles.productTxt} ${styles.total}`}>
       <tbody>
@@ -17,7 +17,7 @@ export function Total({ total }) {
         </tr>
         <tr>
           <td>Total</td>
-          <td>${shippingFee + total}</td>
+          <td>${Math.round((shippingFee + total) * 100) / 100}</td>
         </tr>
       </tbody>
     </table>

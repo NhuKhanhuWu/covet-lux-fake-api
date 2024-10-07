@@ -10,7 +10,8 @@ function ProductItem({ product }) {
           <img
             alt={product.title}
             src={product?.image?.replace("[", "").replace('"', "")}
-            className="img"></img>
+            className="img"
+            loading="lazy"></img>
         </div>
 
         <p className={styles.title}>{product.title}</p>

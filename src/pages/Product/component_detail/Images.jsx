@@ -10,7 +10,8 @@ export function Images({ product }) {
         className="img"
         alt={product.title}
         src={product.image}
-        style={{ width: "90%" }}></img>
+        style={{ width: "90%" }}
+        loading="lazy"></img>
     </div>
   );
 }

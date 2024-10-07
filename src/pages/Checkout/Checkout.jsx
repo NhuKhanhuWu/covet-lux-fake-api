@@ -15,6 +15,7 @@ import { Total } from "./component/Total";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { reset } from "../../redux/cartSlide";
+import { addOrder } from "../../redux/ordersSlide";
 
 // hook
 import useGetDataList from "../../hooks/useGetDataList";
@@ -74,8 +75,6 @@ function Checkout() {
     function () {
       if (!isBuy) return;
 
-      console.log(1);
-
       // get personal infor & store in personalInfor variable
       let personalInfor = {};
       const personalEls = document.querySelectorAll(`.inputInfor`);
@@ -89,25 +88,18 @@ function Checkout() {
         'input[name="payment-method"]:checked'
       ).value;
 
-      // store order to local storage
+      // STORE ORDER TO LOCAL STORAGE
       // create new order
       const newOrder = {
         id: orderId,
-        ...personalInfor,
+        personalInfor: personalInfor,
         payMethod: paymentMethod,
         products: cart,
         date: new Date(),
+        status: paymentMethod === "cod" ? "placed" : "paid",
       };
 
-      const orderString =
-        localStorage.getItem("orders") !== null
-          ? localStorage.getItem("orders")
-          : "[]";
-
-      // store order
-      let orders = JSON.parse(orderString);
-      orders.unshift(newOrder);
-      localStorage.setItem("orders", JSON.stringify(orders));
+      dispatch(addOrder({ ...newOrder }));
 
       // clear cart
       dispatch(reset());

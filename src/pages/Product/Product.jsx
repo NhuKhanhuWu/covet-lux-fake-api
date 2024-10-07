@@ -94,7 +94,7 @@ function Product() {
     <>
       <NavBar></NavBar>
 
-      <FlexContainer gap={5}>
+      <FlexContainer gap={10}>
         <SideBarProduct>
           <Category></Category>
           {/* <PriceRange dispacth={dispacth}></PriceRange> */}

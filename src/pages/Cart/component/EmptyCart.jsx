@@ -9,7 +9,7 @@ export function EmptyCart() {
     <div className={`columnContent ${styles.emtyContainer}`}>
       <img alt="empty cart" src={emptyCart} style={{ width: "35%" }}></img>
       <p className={styles.emptyTxt}>Your cart is empty</p>
-      <Link to="/test-covet-lux/products?page=1" className={`border-btn`}>
+      <Link to="/covet-lux-fake-api/products?page=1" className={`border-btn`}>
         Go shopping{" "}
         <ion-icon
           name="arrow-forward-outline"

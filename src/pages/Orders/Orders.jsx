@@ -4,14 +4,14 @@ import Footer from "../../components/Footer/Footer";
 import SideBarAcc from "../../components/SideBarAcc/SideBarAcc.jsx";
 import FlexContainer from "../../components/FlexContainer.jsx";
 import { BlankDivider } from "../../components/Divider.jsx";
+import emptyBox from "../../../public/empty-box.png";
+import RenderQueryData from "../../components/RenderQueryData.jsx";
 
 import styles from "./Orders.module.css";
 import { Link } from "react-router-dom";
-import useGetLocal from "../../hooks/useGetLocal.jsx";
 
-import emptyBox from "../../../public/empty-box.png";
 import useGetDataList from "../../hooks/useGetDataList.jsx";
-import RenderQueryData from "../../components/RenderQueryData.jsx";
+import { useSelector } from "react-redux";
 
 function EmptyOrder() {
   return (
@@ -53,7 +53,7 @@ function Order({ children }) {
 
 function Orders() {
   // get data from localStorage
-  const data = useGetLocal("orders");
+  const data = useSelector((state) => state.orders).orderArray;
 
   //   get product list from order
   const productList = data?.map((order) => order?.products);
@@ -81,36 +81,48 @@ function Orders() {
       <FlexContainer>
         <SideBarAcc></SideBarAcc>
 
-        {/* <RenderQueryData isError={isError} isLoading={isLoading}> */}
-        <div className={styles.content}>
-          {dataResponse.length === 0 ? (
-            <EmptyOrder></EmptyOrder>
-          ) : (
-            orders.map((order, iOrder) => (
-              <Order key={`order-${iOrder}`}>
-                {order.map((product, iProduct) => (
-                  <Product
-                    product={product}
-                    key={`product-${iProduct}`}></Product>
-                ))}
+        <RenderQueryData
+          isError={isError}
+          isLoading={isLoading}
+          isEmptyList={orders.length === 0}>
+          <div className={styles.content}>
+            {dataResponse.length === 0 ? (
+              <EmptyOrder></EmptyOrder>
+            ) : (
+              orders.map((order, iOrder) => (
+                <Order key={`order-${iOrder}`}>
+                  {/* link to detal & status */}
+                  <div className={styles.orderHeader}>
+                    <span>{data[iOrder].status.toUpperCase()}</span>
+                    {" | "}
+                    <Link
+                      to={`/covet-lux-fake-api/order?id=${data[iOrder].id}`}
+                      className="link">
+                      See detail
+                    </Link>
+                  </div>
 
-                <div>
-                  <p>
-                    Total: $
-                    {order.reduce(
-                      (pre, curr) => (pre += curr.amount * curr.price),
-                      0
-                    )}
-                  </p>
-                  <Link to={`/covet-lux-fake-api/order?${data[iOrder].id}`}>
-                    See detail
-                  </Link>
-                </div>
-              </Order>
-            ))
-          )}
-        </div>
-        {/* </RenderQueryData> */}
+                  {order.map((product, iProduct) => (
+                    <Product
+                      product={product}
+                      key={`product-${iProduct}`}></Product>
+                  ))}
+
+                  <div className={styles.orderSumary}>
+                    Total:
+                    <span>
+                      $
+                      {order.reduce(
+                        (pre, curr) => (pre += curr.amount * curr.price),
+                        0
+                      )}
+                    </span>
+                  </div>
+                </Order>
+              ))
+            )}
+          </div>
+        </RenderQueryData>
       </FlexContainer>
 
       <BlankDivider></BlankDivider>

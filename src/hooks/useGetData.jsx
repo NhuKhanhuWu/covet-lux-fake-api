@@ -10,20 +10,25 @@ function useGetData(query) {
   useEffect(
     function () {
       async function fetchData() {
-        try {
-          setLoading(true); //start loading
-          setError("");
+        // check query
+        const isNullQuery = query.includes("null");
 
-          // try get data
-          const response = await fetch(`https://fakestoreapi.com/${query}`);
-          // console.log(`https://fakestoreapi.com/${query}`);
+        if (!isNullQuery) {
+          try {
+            setLoading(true); //start loading
+            setError("");
 
-          const data = await response.json();
-          setDataResponse(data);
-        } catch (err) {
-          setError(err.message); //set error if there is
-        } finally {
-          setLoading(false); //stop loading
+            // try get data
+            const response = await fetch(`https://fakestoreapi.com/${query}`);
+            // console.log(`https://fakestoreapi.com/${query}`);
+
+            const data = await response.json();
+            setDataResponse(data);
+          } catch (err) {
+            setError(err.message); //set error if there is
+          } finally {
+            setLoading(false); //stop loading
+          }
         }
       }
 

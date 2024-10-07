@@ -2,7 +2,7 @@
 /* table gap */
 .productContainer {
   border-collapse: separate;
-  border-spacing: 0 1rem;
+  border-spacing: 0 5rem;
   font-size: 1.5rem;
   border-right: solid 1px var(--orange-transparent-2);
 }
@@ -37,6 +37,10 @@
   width: 10rem;
 }
 
+/* row border */
+.productContainer > tbody > tr:not(:first-child):not(:last-child) {
+}
+
 /* btn */
 .deleteBtn {
   font-size: 2rem;
@@ -50,6 +54,10 @@
 /* checkout section */
 .totalContainer {
   flex-grow: 1;
+  margin-left: 3rem;
+  position: sticky;
+  top: 10%;
+  height: fit-content;
 }
 
 .totalTable {

@@ -21,26 +21,28 @@ function BuySuccess() {
     !Array.isArray(recommenProducts) || recommenProducts.length === 0;
 
   // check if user login
-  const isLogin = localStorage.getItem("userInfor") !== null;
+  const isLogin = localStorage.getItem("user") !== null;
 
   // render order detail url
   const [url] = useSearchParams();
   const orderId = url.get("order_id");
+  console.log(isLogin);
 
   return (
     <>
       <NavBar></NavBar>
+      {/* message */}
       <div className={styles.message}>
         <span className="material-symbols-outlined">check_circle</span>
         <p>Order successfully!</p>
 
         <div className={styles.redirect}>
-          <Link to="/test-covet-lux/" className="fill-btn ">
+          <Link to="/covet-lux-fake-api/" className="fill-btn ">
             Homepage
           </Link>
           {isLogin && (
             <Link
-              to={`/test-covet-lux/orders?id=${orderId}`}
+              to={`/covet-lux-fake-api/order?${orderId}`}
               className="border-btn">
               Order detail
             </Link>
@@ -51,7 +53,7 @@ function BuySuccess() {
       {/* recommended products */}
       <ListHeader
         title={"You may also like"}
-        url="/test-covet-lux/products?page=1"></ListHeader>
+        url="/covet-lux-fake-api/products?page=1"></ListHeader>
       <RenderQueryData
         isError={isError}
         isLoading={isLoading}

@@ -3,10 +3,16 @@
 import { useEffect } from "react";
 import styles from "../Cart.module.css";
 
+function round2Digit(number) {
+  return Math.round(number * 100) / 100;
+}
+
 export function TotalDetail({ totalCost, setTotalMoney, totalMoney }) {
   const shippingFee = totalCost >= 100 ? 0 : 10;
   const shipMessage =
-    shippingFee > 0 ? `($${100 - totalCost} more to get free shipment)` : "";
+    shippingFee > 0
+      ? `($${round2Digit(100 - totalCost)} more to get free shipment)`
+      : "";
 
   useEffect(
     function () {
@@ -14,6 +20,7 @@ export function TotalDetail({ totalCost, setTotalMoney, totalMoney }) {
     },
     [setTotalMoney, shippingFee, totalCost]
   );
+
   return (
     <>
       <tr>
@@ -31,7 +38,7 @@ export function TotalDetail({ totalCost, setTotalMoney, totalMoney }) {
       </tr>
       <tr>
         <td>Total</td>
-        <td className={styles.total}>${totalMoney}</td>
+        <td className={styles.total}>${round2Digit(totalMoney)}</td>
       </tr>
     </>
   );

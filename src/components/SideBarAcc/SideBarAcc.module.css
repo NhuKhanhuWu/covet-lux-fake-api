@@ -9,6 +9,9 @@
   padding-left: 0;
   font-size: 1.6rem;
   font-weight: 600;
+  position: sticky;
+  top: 15%;
+  height: fit-content;
 }
 
 .container > a {
