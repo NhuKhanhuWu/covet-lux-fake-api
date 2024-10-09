@@ -1,10 +1,14 @@
 /** @format */
 
 import useGetData from "../../hooks/useGetData";
-import { Link, useSearchParams } from "react-router-dom";
 import styles from "./SideBarProduct.module.css";
 import RenderQueryData from "../RenderQueryData.jsx";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+
+// redux
+import { useSelector } from "react-redux";
+import { editCategory, editPrice } from "../../redux/productsSlide.js";
+import { useDispatch } from "react-redux";
 
 function Category() {
   // get all category
@@ -14,9 +18,11 @@ function Category() {
     isError,
   } = useGetData("products/categories");
 
-  // highlight current category
-  const [url] = useSearchParams();
-  const currCategory = url.get("categoryId");
+  // get curr category
+  const currCategory = useSelector((state) => state.products.categoryFilter);
+
+  // set filter category
+  const dispatch = useDispatch();
 
   return (
     <div className={styles.category}>
@@ -28,13 +34,19 @@ function Category() {
         <div
           className="columnContent"
           style={{ marginBottom: "1.5rem", gap: "2rem" }}>
+          <p
+            onClick={() => dispatch(editCategory(""))}
+            className={currCategory === "" ? "orange-text" : ""}>
+            All category
+          </p>
+
           {categories.map((catgr, i) => (
-            <Link
-              className={catgr == currCategory ? "orange-text" : ""}
-              key={`category-${i}`}
-              to={`/covet-lux-fake-api/products/?categoryId=${catgr}`}>
+            <p
+              onClick={() => dispatch(editCategory(encodeURI(catgr)))}
+              className={encodeURI(catgr) == currCategory ? "orange-text" : ""}
+              key={`category-${i}`}>
               {catgr.slice(0, 1).toUpperCase() + catgr.slice(1)}
-            </Link>
+            </p>
           ))}
         </div>
       </RenderQueryData>
@@ -42,35 +54,20 @@ function Category() {
   );
 }
 
-function PriceRange({ dispacth }) {
+function PriceRange() {
   const priceFrom = useRef(null);
   const priceTo = useRef(null);
 
-  // store query in state
-  const [query, setQuery] = useState(null);
-  const { dataResponse, isLoading, isError } = useGetData(query);
-  // console.log(dataResponse?.statusCode, isLoading, isError);
-
+  // update price range to redux
+  const dispacth = useDispatch();
   function handlePriceFilter(e) {
-    e.preventDefault();
-    const newQuery = `products/?price_min=${priceFrom.current.value}&price_max=${priceTo.current.value}`;
-    setQuery(newQuery); //update query state => trigger API call
-  }
+    const from = priceFrom.current.value !== "" ? priceFrom.current.value : 0;
+    const to =
+      priceTo.current.value !== "" ? priceTo.current.value : 9999999999;
 
-  useEffect(
-    function () {
-      if (!dataResponse?.statusCode) {
-        // Dispatch the new product list when the data is successfully fetched
-        dispacth({
-          type: "updateData",
-          productList: dataResponse,
-          error: isError,
-          loading: isLoading,
-        });
-      }
-    },
-    [dataResponse, dispacth, isError, isLoading]
-  );
+    e.preventDefault();
+    dispacth(editPrice([from, to]));
+  }
 
   return (
     <div>

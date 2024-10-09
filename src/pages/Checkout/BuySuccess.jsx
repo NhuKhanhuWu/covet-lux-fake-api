@@ -42,7 +42,7 @@ function BuySuccess() {
           </Link>
           {isLogin && (
             <Link
-              to={`/covet-lux-fake-api/order?${orderId}`}
+              to={`/covet-lux-fake-api/order?id=${orderId}`}
               className="border-btn">
               Order detail
             </Link>

@@ -3,9 +3,29 @@
 import { Link } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import logo from "../../../public/logo-no-background.png";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { editTitle } from "../../redux/productsSlide";
 
 function NavBar() {
+  // check if login
   const isLogin = localStorage.getItem("user") !== null;
+
+  // search product
+  const [title, setTitle] = useState(
+    useSelector((state) => state.products.titleFilter)
+  );
+  const dispacth = useDispatch();
+  const navigate = useNavigate(); //redirect to product page
+
+  function handleFilterTitle(e, title) {
+    e.preventDefault();
+    // if (title !== "") {
+    dispacth(editTitle(title));
+    navigate("/covet-lux-fake-api/products");
+    // }
+  }
 
   return (
     <nav className={styles.nav}>
@@ -32,12 +52,19 @@ function NavBar() {
       </ul>
 
       <ul className={styles.navLogo}>
-        <div className={styles.search}>
-          <input type="text" placeholder="Search..." />
-          <button>
+        <form
+          className={styles.search}
+          onSubmit={(e) => handleFilterTitle(e, title.toLowerCase())}>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <button type="submit">
             <ion-icon name="search-outline"></ion-icon>
           </button>
-        </div>
+        </form>
         <Link to="/covet-lux-fake-api/cart">
           <ion-icon name="cart-outline"></ion-icon>
         </Link>

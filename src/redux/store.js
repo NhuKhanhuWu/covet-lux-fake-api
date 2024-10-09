@@ -5,6 +5,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import cartSlide from "./cartSlide";
 import orderSlide from "./ordersSlide";
+import productsSlice from "./productsSlide";
 
 // Persist configuratio
 const cartPersistConfig = {
@@ -32,6 +33,7 @@ const persistedOrderReducer = persistReducer(
 const rootReducer = combineReducers({
   cart: persistedCartReducer,
   orders: persistedOrderReducer,
+  products: productsSlice.reducer,
 });
 
 // Configure the store
