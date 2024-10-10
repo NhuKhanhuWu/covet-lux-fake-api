@@ -133,6 +133,7 @@ function HomePage() {
         {/* blog section: end */}
       </main>
 
+      <BlankDivider></BlankDivider>
       {/* footer: start */}
       <Footer></Footer>
       {/* footer: end */}

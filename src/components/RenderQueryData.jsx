@@ -15,7 +15,7 @@ function RenderQueryData({
       {!isLoading &&
         !isError &&
         isEmptyList &&
-        !renderError &&
+        // !renderError &&
         (emptyMess !== null ? emptyMess : "No result")}
       {!isLoading && !isError && !isEmptyList && children}
       {isError && "error"}

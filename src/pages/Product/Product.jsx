@@ -61,36 +61,6 @@ function Product() {
   // render products
   const status = useSelector((state) => state.products.status);
 
-  // // get filter query
-  // const [urlQuery] = useSearchParams();
-  // const [page, setPage] = useState(1);
-
-  // const category =
-  //   urlQuery.get("categoryId") === null ? "" : urlQuery.get("categoryId");
-  // const title = urlQuery.get("title") === null ? "" : urlQuery.get("title");
-
-  // const query = `products${category !== "" ? "/category" : ""}/${category}`;
-
-  // // get product by query
-  // const { dataResponse, isError, isLoading } = useGetData(query);
-
-  // // store data in reducer
-  // const [{ productList, error, loading }, dispacth] = useReducer(
-  //   reducer,
-  //   initProduct
-  // );
-  // useEffect(
-  //   function () {
-  //     dispacth({
-  //       type: "updateData",
-  //       productList: dataResponse,
-  //       error: isError,
-  //       loading: isLoading,
-  //     });
-  //   },
-  //   [dataResponse, isError, isLoading]
-  // );
-
   return (
     <>
       <NavBar></NavBar>

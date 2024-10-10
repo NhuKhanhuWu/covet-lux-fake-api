@@ -26,7 +26,6 @@ function BuySuccess() {
   // render order detail url
   const [url] = useSearchParams();
   const orderId = url.get("order_id");
-  console.log(isLogin);
 
   return (
     <>

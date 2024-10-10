@@ -28,7 +28,7 @@ export function TotalDetail({ totalCost, setTotalMoney, totalMoney }) {
         <td>${totalCost}</td>
       </tr>
       <tr>
-        <td>Shipping fee</td>
+        <td>Delivery fee</td>
         <td>
           ${shippingFee}{" "}
           <p className="gray-text" style={{ fontSize: "1.4rem" }}>

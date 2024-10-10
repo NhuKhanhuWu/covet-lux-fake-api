@@ -42,7 +42,10 @@ function Category() {
 
           {categories.map((catgr, i) => (
             <p
-              onClick={() => dispatch(editCategory(encodeURI(catgr)))}
+              onClick={() => {
+                dispatch(editCategory(encodeURI(catgr)));
+                window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+              }}
               className={encodeURI(catgr) == currCategory ? "orange-text" : ""}
               key={`category-${i}`}>
               {catgr.slice(0, 1).toUpperCase() + catgr.slice(1)}

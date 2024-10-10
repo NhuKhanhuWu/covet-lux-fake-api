@@ -56,6 +56,9 @@ function Checkout() {
     0
   );
 
+  // shipping fee
+  const deliverFee = total >= 100 ? 0 : 10;
+
   // handle buy product
   const [isBuy, setBuy] = useState(false);
   const orderId = new Date().valueOf();
@@ -96,7 +99,9 @@ function Checkout() {
         payMethod: paymentMethod,
         products: cart,
         date: new Date(),
-        status: paymentMethod === "cod" ? "placed" : "paid",
+        goodsTotal: total,
+        deliverFee: deliverFee,
+        status: paymentMethod === "cod" ? "confirmed" : "paid",
       };
 
       dispatch(addOrder({ ...newOrder }));
@@ -153,7 +158,7 @@ function Checkout() {
           <ListHeader
             title={"Total detail"}
             className={styles.header}></ListHeader>
-          <Total total={total}></Total>
+          <Total shippingFee={deliverFee} total={total}></Total>
           <BuyBtn></BuyBtn>
         </div>
       </FlexContainer>

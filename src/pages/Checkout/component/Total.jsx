@@ -2,8 +2,7 @@
 
 import styles from "../Checkout.module.css";
 
-export function Total({ total }) {
-  const shippingFee = total >= 100 ? 0 : 10;
+export function Total({ total, shippingFee }) {
   return (
     <table className={`${styles.table} ${styles.productTxt} ${styles.total}`}>
       <tbody>

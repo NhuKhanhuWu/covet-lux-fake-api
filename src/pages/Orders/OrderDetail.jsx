@@ -1,13 +1,17 @@
 /** @format */
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
-import { StatusBar } from "./component_orderDetail/StatusBar";
+
 import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import { StatusBar } from "./component_orderDetail/StatusBar";
 import styles from "./OrderDetail.module.css";
 import { BlankDivider } from "../../components/Divider";
 import { Header } from "./component_orderDetail/Header";
+import OrderSummary from "./component_orderDetail/OrderSummary";
+import FlexContainer from "../../components/FlexContainer";
+import OrderProducts from "./component_orderDetail/OrderProducts";
 
 function OrderDetail() {
   // get order id
@@ -15,7 +19,7 @@ function OrderDetail() {
   const id = Number(url.get("id"));
 
   // get order detail
-  const orderDetail = useSelector((state) => state.orders).orderArray.find(
+  const orderInfor = useSelector((state) => state.orders).orderArray.find(
     (order) => order.id === id
   );
 
@@ -26,12 +30,13 @@ function OrderDetail() {
 
       <div className={styles.content}>
         <Header id={id}></Header>
-        <StatusBar
-          paymentMethob={orderDetail.payMethod}
-          currStatus={orderDetail.status}></StatusBar>
+        <StatusBar orderInfor={orderInfor}></StatusBar>
+
+        <OrderSummary orderInfor={orderInfor}></OrderSummary>
+        <OrderProducts orderInfor={orderInfor}></OrderProducts>
       </div>
 
-      <BlankDivider></BlankDivider>
+      <BlankDivider distance={4}></BlankDivider>
       <Footer></Footer>
     </>
   );
